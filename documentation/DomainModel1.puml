@@ -1,0 +1,45 @@
+@startuml
+!pragma layout smetana
+Title Domain Model
+
+class user{
+firstname
+surname
+email
+birthdate
+zip
+}
+
+class phone{
+number
+}
+
+class address{
+id
+street_name
+street_number
+}
+
+class city{
+zip
+city_name
+region_name
+municipality_name
+}
+
+
+class hobby{
+name
+wikiLink
+category
+type
+}
+
+
+user "*" -- "*" hobby
+user "*" -- "1" address
+user "1" -- "*" phone
+address "*" -- "1" city
+
+
+@enduml
