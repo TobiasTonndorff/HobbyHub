@@ -1,0 +1,2 @@
+# HobbyHub
+JPA backend project 
