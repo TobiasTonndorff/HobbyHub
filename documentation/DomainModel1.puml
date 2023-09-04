@@ -6,30 +6,40 @@ class user{
 firstname
 surname
 email
+birthdate
 zip
 }
 
-class telefon{
-telefon number
+class phone{
+number
 }
 
 class address{
-zip
-city
-region
-municipality
+id
+streetname
+streetnumber
 }
+
+class city{
+zip
+city_name
+region_name
+municipality_name
+}
+
 
 class hobby{
 name
-wiki link
+wikiLink
 category
 type
 }
 
+
 user "*" -- "*" hobby
 user "*" -- "1" address
-user "1" -- "*" telefon
+user "1" -- "*" phone
+address "*" -- "1" city
 
 
 @enduml
