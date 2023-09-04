@@ -17,4 +17,6 @@ public class ZipCode {
     @Column(name = "municipality_name")
     private String municipalityName;
 
+
+
 }
