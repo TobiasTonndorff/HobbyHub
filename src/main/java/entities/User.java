@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
