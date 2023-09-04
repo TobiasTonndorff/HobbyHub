@@ -1,14 +1,14 @@
 package entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import ENUM.Category;
+import ENUM.Type;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "hobby")
 public class Hobby {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
 
@@ -18,6 +18,12 @@ public class Hobby {
 
     @Column(name = "wikilink")
     private String wikiLink;
+
+    @Column(name = "category")
+    private Category category;
+
+    @Column(name = "type")
+    private Type type;
 
 
 
