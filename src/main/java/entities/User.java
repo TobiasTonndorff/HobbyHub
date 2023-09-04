@@ -28,8 +28,9 @@ public class User {
     @Column(name = "surname", nullable = false)
     private String surname;
 
-    @Column(name = "birthdate", nullable = false)
-    private String birthdate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birthdate")
+    private LocalDate birthdate;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -46,9 +47,15 @@ public class User {
     private String zip;
 
     @ManyToMany(mappedBy = "users")
-    private List<Hobby> hobby;
+    private List<Hobby> hobbies;
 
-    public User(String firstname, String surname, String birthdate, String email, LocalDate createdAt, LocalDate updatedAt, String zip) {
+    @OneToMany(mappedBy = "phone")
+    private List<PhoneNumber> phones;
+
+    @ManyToOne
+    private Address address;
+    
+    public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, String zip) {
         this.firstname = firstname;
         this.surname = surname;
         this.birthdate = birthdate;
