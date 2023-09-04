@@ -16,8 +16,8 @@ number
 
 class address{
 id
-streetname
-streetnumber
+street_name
+street_number
 }
 
 class city{
