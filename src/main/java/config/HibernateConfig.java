@@ -1,5 +1,9 @@
 package config;
 
+import entities.Address;
+import entities.Hobby;
+import entities.PhoneNumber;
+import entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
@@ -56,8 +60,10 @@ public class HibernateConfig {
     }
 
     private static void getAnnotationConfiguration(Configuration configuration) {
-        // add annotated classes
-
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Hobby.class);
+        configuration.addAnnotatedClass(Address.class);
+        configuration.addAnnotatedClass(PhoneNumber.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {
