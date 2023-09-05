@@ -12,6 +12,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "hobby")
+@NamedQueries({
+        @NamedQuery(name = "Hobby.HobbiesUserCountDTO", query = "SELECT new org.HobbyHub.dto.HobbyUserCountDTO(h.id, h.name, CAST(COUNT(u) AS int) ) FROM Hobby h JOIN h.users u GROUP BY h.id"),
+        @NamedQuery(name = "Hobby.HobbyUserCountDTO", query = "SELECT new org.HobbyHub.dto.HobbyUserCountDTO(h.id, h.name, CAST(COUNT(u) AS int) ) FROM Hobby h JOIN h.users u WHERE h.id = :id GROUP BY h.id" )
+})
 public class Hobby {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +36,7 @@ public class Hobby {
     @Column(name = "type")
     private HobbyType type;
 
-    @ManyToMany(mappedBy = "hobbies")
+    @ManyToMany(mappedBy = "hobbies", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
     public Hobby(String name, String wikiLink, Category category, HobbyType type) {
@@ -44,6 +48,8 @@ public class Hobby {
 
     public void addUser(User user) {
         users.add(user);
+        user.addHobby(this);
+
     }
 
 

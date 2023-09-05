@@ -3,6 +3,7 @@ package org.HobbyHub.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.HobbyHub.entities.Address;
 
 public class AddressDAO {
 private static EntityManagerFactory emf;
@@ -17,10 +18,10 @@ private static AddressDAO instance;
     return instance;
         }
 
-        public void createAddress(AddressDAO addressDAO){
+        public void createAddress(Address address){
         try (var em = emf.createEntityManager()){
             em.getTransaction().begin();
-            em.persist(addressDAO);
+            em.persist(address);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
