@@ -2,7 +2,7 @@ package org.HubbyHub.config;
 
 import org.HubbyHub.entities.Address;
 import org.HubbyHub.entities.Hobby;
-import org.HubbyHub.entities.PhoneNumber;
+import org.HubbyHub.entities.Phone;
 import org.HubbyHub.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -63,7 +63,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Hobby.class);
         configuration.addAnnotatedClass(Address.class);
-        configuration.addAnnotatedClass(PhoneNumber.class);
+        configuration.addAnnotatedClass(Phone.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {
