@@ -1,27 +1,24 @@
 package entities;
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Entity
-@NoArgsConstructor
+@Setter
 @Getter
+@NoArgsConstructor
 @ToString
-@Table(name = "user")
+@EqualsAndHashCode
+
+@Table(name = "users")
+@Entity
 public class User {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @Id
     private int id;
-
+    
     @Column(name = "firstname", nullable = false)
     private String firstname;
 
@@ -54,7 +51,7 @@ public class User {
 
     @ManyToOne
     private Address address;
-    
+
     public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, String zip) {
         this.firstname = firstname;
         this.surname = surname;

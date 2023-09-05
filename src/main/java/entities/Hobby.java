@@ -35,7 +35,7 @@ public class Hobby {
     private enum HobbyType {
         INDENDØRS("Indendørs"),
         KONKURRENCE("Konkurrence"),
-        KOMBI("Idendørs/Udendørs"),
+        KOMBI("Indendørs/Udendørs"),
         OBSERVATION("Observation"),
         SAMLER("Samler hobbyer"),
         UDENDØRS("Udendørs"),
