@@ -1,6 +1,7 @@
 package org.HobbyHub.DAO;
 
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 public class AddressDAO {
@@ -16,7 +17,7 @@ private static AddressDAO instance;
     return instance;
         }
 
-        public void saveAddress(AddressDAO addressDAO){
+        public void createAddress(AddressDAO addressDAO){
         try (var em = emf.createEntityManager()){
             em.getTransaction().begin();
             em.persist(addressDAO);
@@ -27,9 +28,24 @@ private static AddressDAO instance;
             }
 
 
-        }
+     }
 
-        public void updateAddress(AddressDAO addressDAO) {
+
+
+
+    public AddressDAO getAddressById(int id){
+        try (var em = emf.createEntityManager()){
+            return em.find(AddressDAO.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    public void updateAddress(AddressDAO addressDAO) {
             try (var em = emf.createEntityManager()) {
                 em.getTransaction().begin();
                 em.persist(addressDAO);
@@ -47,6 +63,4 @@ private static AddressDAO instance;
                 e.printStackTrace();
             }
         }
-
-
 }
