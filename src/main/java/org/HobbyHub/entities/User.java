@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 
-@Table(name = "user")
+@Table(name = "'user'")
 @Entity
 public class User {
 
@@ -50,7 +50,7 @@ public class User {
     )
     private List<Hobby> hobbies;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne
