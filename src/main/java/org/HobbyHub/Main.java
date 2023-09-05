@@ -17,13 +17,26 @@ public class Main {
 
 //        createUser(emf);
 
-        countAllUsersInAllHobbies(emf);
+//        countAllUsersInAllHobbies(emf);
+
+        countAllUsersInAllHobby(emf);
+
+
     }
+
+    private static void countAllUsersInAllHobby(EntityManagerFactory emf) {
+        HobbyDAO hobbyDAO = HobbyDAO.getInstance(emf);
+
+        var res = hobbyDAO.getHobbyUserCount(1);
+
+        System.out.println(res);
+    }
+
 
     private static void countAllUsersInAllHobbies(EntityManagerFactory emf) {
         HobbyDAO hobbyDAO = HobbyDAO.getInstance(emf);
 
-        hobbyDAO.getHobbyUserCount().forEach(System.out::println);
+        hobbyDAO.getHobbiesUserCount().forEach(System.out::println);
     }
 
     private static void createUser(EntityManagerFactory emf) {

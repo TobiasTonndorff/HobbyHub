@@ -55,9 +55,15 @@ public class HobbyDAO {
         }
     }
 
-    public List<HobbyUserCountDTO> getHobbyUserCount(){
+    public HobbyUserCountDTO getHobbyUserCount(int id){
         try(var em = emf.createEntityManager()){
-            return em.createNamedQuery("Hobby.HobbyUserCountDTO", HobbyUserCountDTO.class).getResultList();
+            return em.createNamedQuery("Hobby.HobbyUserCountDTO", HobbyUserCountDTO.class).setParameter("id", id).getSingleResult();
+        }
+    }
+
+    public List<HobbyUserCountDTO> getHobbiesUserCount(){
+        try(var em = emf.createEntityManager()){
+            return em.createNamedQuery("Hobby.HobbiesUserCountDTO", HobbyUserCountDTO.class).getResultList();
         }
     }
 
