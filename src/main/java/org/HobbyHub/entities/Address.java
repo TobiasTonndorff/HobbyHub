@@ -1,10 +1,7 @@
 package org.HobbyHub.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 
 import java.util.HashSet;
@@ -14,21 +11,40 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 
 
 @Entity
+@Table(name = "address")
 
 public class Address {
-@Id
+
+    // primary key and generation strategy
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String  Address;
-    private String StreetNumber;
 
 
-    //En til mange relation med User
+    @Column(name = "street_name", nullable = false, length = 255)
+    private String  streetName;
+
+
+    @Column(name = "street_number", nullable = false, length = 255)
+    private String streetNumber;
+
+
+
+    // many to one relation with ZipCode
+    @ManyToOne
+    private ZipCode zipCode;
+
+
+    //one to many relation with User
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
+
+
 
     // bi-directional update
     public void addUser(User user){
@@ -39,4 +55,10 @@ public class Address {
         }
     }
 
+
+    // constructor
+    public Address(String streetName, String streetNumber) {
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+    }
 }

@@ -3,9 +3,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Setter
+
 @Getter
 @NoArgsConstructor
 @ToString
@@ -43,8 +45,8 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private List<Hobby> hobbies;
 
-    @OneToMany(mappedBy = "phone")
-    private List<Phone> phones;
+    @OneToMany(mappedBy = "user")
+    private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne
     @Column(name = "address", nullable = false)
