@@ -1,4 +1,4 @@
-package org.HubbyHub.entities;
+package org.HobbyHub.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,7 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode
 
 
-@Entity
+@Entity''
 @Table(name = "address")
 
 public class Address {

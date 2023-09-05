@@ -1,10 +1,12 @@
-package org.HubbyHub.entities;
+package org.HobbyHub.entities;
 
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 
@@ -15,7 +17,6 @@ public class Hobby {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-
 
     @Column(name = "name")
     private String name;
@@ -31,8 +32,26 @@ public class Hobby {
     @Column(name = "type")
     private HobbyType type;
 
+    @ManyToMany
+    private Set<User> users = new HashSet<>();
 
-    private enum HobbyType {
+    public Hobby(String name, String wikiLink, Category category, HobbyType type) {
+        this.name = name;
+        this.wikiLink = wikiLink;
+        this.category = category;
+        this.type = type;
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+
+
+
+
+
+    public enum HobbyType {
         INDENDØRS("Indendørs"),
         KONKURRENCE("Konkurrence"),
         KOMBI("Indendørs/Udendørs"),
@@ -48,7 +67,7 @@ public class Hobby {
         }
     }
 
-    private enum Category {
+    public enum Category {
         GERNEREL("Generel"),
         EDUCATIONAL("Educational hobbies"),
         SAMLINGER("Samler hobbyer"),
@@ -60,9 +79,7 @@ public class Hobby {
         private Category(String categoryString) {
             this.categoryString = categoryString;
         }
+
+
     }
-
-
-
-
 }

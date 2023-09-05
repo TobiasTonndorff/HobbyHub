@@ -1,11 +1,11 @@
-package org.HubbyHub.config;
+package org.HobbyHub.config;
 
-import org.HubbyHub.entities.Address;
-import org.HubbyHub.entities.Hobby;
-import org.HubbyHub.entities.Phone;
-import org.HubbyHub.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
+import org.HobbyHub.entities.Address;
+import org.HobbyHub.entities.Hobby;
+import org.HobbyHub.entities.Phone;
+import org.HobbyHub.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -37,7 +37,7 @@ public class HibernateConfig {
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
-            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on entities
+            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on org.HobbyHub.entities
 
 
             return getEntityManagerFactory(configuration, props);
