@@ -1,4 +1,4 @@
-package entities;
+package org.HubbyHub.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "phone")
+@Table(name = "phone_number")
 public class Phone {
     @Id
     @Column(name = "id", unique = true, nullable = false)

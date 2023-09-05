@@ -1,4 +1,4 @@
-package entities;
+package org.HubbyHub.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
