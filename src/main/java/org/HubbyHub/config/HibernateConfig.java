@@ -1,9 +1,9 @@
-package config;
+package org.HubbyHub.config;
 
-import entities.Address;
-import entities.Hobby;
-import entities.PhoneNumber;
-import entities.User;
+import org.HubbyHub.entities.Address;
+import org.HubbyHub.entities.Hobby;
+import org.HubbyHub.entities.PhoneNumber;
+import org.HubbyHub.entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 import org.hibernate.SessionFactory;
