@@ -32,6 +32,13 @@ public class UserDAO {
         }
     }
 
+    public User getUserById(int id){
+        try(var em = emf.createEntityManager()){
+            User user = em.find(User.class, id);
+            return user;
+        }
+    }
+
 
 
 }

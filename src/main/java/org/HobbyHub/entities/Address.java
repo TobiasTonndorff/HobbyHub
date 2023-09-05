@@ -38,7 +38,7 @@ public class Address {
 
 
     //one to many relation with User
-    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
 
@@ -51,12 +51,14 @@ public class Address {
         }
     }
 
-
-
     // constructor
     public Address(String streetName, String streetNumber) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
+    }
+
+    public void setZipCode(ZipCode zipCode){
+        this.zipCode = zipCode;
     }
 
 

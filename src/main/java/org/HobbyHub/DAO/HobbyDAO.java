@@ -1,7 +1,10 @@
 package org.HobbyHub.DAO;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.HobbyHub.dto.HobbyUserCountDTO;
 import org.HobbyHub.entities.Hobby;
+
+import java.util.List;
 
 public class HobbyDAO {
 
@@ -49,6 +52,12 @@ public class HobbyDAO {
             Hobby hobby = em.find(Hobby.class, id);
             em.remove(hobby);
             em.getTransaction().commit();
+        }
+    }
+
+    public List<HobbyUserCountDTO> getHobbyUserCount(){
+        try(var em = emf.createEntityManager()){
+            return em.createNamedQuery("Hobby.HobbyUserCountDTO", HobbyUserCountDTO.class).getResultList();
         }
     }
 

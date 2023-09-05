@@ -42,18 +42,18 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_hobby",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
-    private List<Hobby> hobbies;
+    private Set<Hobby> hobbies = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Phone> phones = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
@@ -66,6 +66,10 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public void addHobby(Hobby hobby) {
+        hobbies.add(hobby);
     }
 
     @PrePersist
