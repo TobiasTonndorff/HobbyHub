@@ -8,13 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-
-
 @Entity
+
+
 @Table(name = "address")
 
 public class Address {
@@ -33,7 +32,6 @@ public class Address {
     private String streetNumber;
 
 
-
     // many to one relation with ZipCode
     @ManyToOne
     private ZipCode zipCode;
@@ -41,19 +39,24 @@ public class Address {
 
     //one to many relation with User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private Set<Address> addresses = new HashSet<>();
 
 
 
     // bi-directional update
-    public void addUser(User user){
-        this.users.add(user);
-        if(user != null){
-            user.setAddress(this);
 
+    public void addAddress(Address address){
+        this.addresses.add(address);
+        if(address != null){
+            address.setAddress(this);
         }
     }
+
+    private void setAddress(Address address) {
+        this.addresses = (Set<Address>) address;
+    }
+
 
 
     // constructor
@@ -61,4 +64,6 @@ public class Address {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
     }
+
+
 }
