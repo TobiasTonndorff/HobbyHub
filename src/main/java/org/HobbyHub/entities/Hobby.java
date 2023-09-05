@@ -32,7 +32,7 @@ public class Hobby {
     @Column(name = "type")
     private HobbyType type;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "hobbies")
     private Set<User> users = new HashSet<>();
 
     public Hobby(String name, String wikiLink, Category category, HobbyType type) {

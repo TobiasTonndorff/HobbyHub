@@ -42,7 +42,12 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany
+    @JoinTable(
+            name = "user_hobby",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "hobby_id")
+    )
     private List<Hobby> hobbies;
 
     @OneToMany(mappedBy = "user")
@@ -56,6 +61,10 @@ public class User {
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+        this.address = address;
+    }
+
+    public void setAddress(Address address) {
         this.address = address;
     }
 

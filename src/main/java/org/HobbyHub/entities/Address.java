@@ -38,23 +38,17 @@ public class Address {
 
 
     //one to many relation with User
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-    private Set<Address> addresses = new HashSet<>();
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
+    private Set<User> users = new HashSet<>();
 
 
 
     // bi-directional update
-
-    public void addAddress(Address address){
-        this.addresses.add(address);
-        if(address != null){
-            address.setAddress(this);
+    public void addUser(User user){
+        this.users.add(user);
+        if(user != null){
+            user.setAddress(this);
         }
-    }
-
-    private void setAddress(Address address) {
-        this.addresses = (Set<Address>) address;
     }
 
 
