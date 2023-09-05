@@ -8,13 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Entity
 
-
-@Entity''
 @Table(name = "address")
 
 public class Address {
