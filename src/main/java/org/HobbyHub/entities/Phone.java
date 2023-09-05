@@ -21,6 +21,7 @@ public class Phone {
 
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Phone(String number) {
