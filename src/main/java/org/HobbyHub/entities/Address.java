@@ -39,18 +39,22 @@ public class Address {
 
     //one to many relation with User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
-    private Set<User> users = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private Set<Address> addresses = new HashSet<>();
 
 
 
     // bi-directional update
-    public void addUser(User user){
-        this.users.add(user);
-        if(user != null){
-            user.setAddress(this);
 
+    public void addAddress(Address address){
+        this.addresses.add(address);
+        if(address != null){
+            address.setAddress(this);
         }
+    }
+
+    private void setAddress(Address address) {
+        this.addresses = (Set<Address>) address;
     }
 
 
@@ -59,4 +63,6 @@ public class Address {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
     }
+
+
 }
