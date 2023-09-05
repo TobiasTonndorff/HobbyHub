@@ -13,6 +13,9 @@ import lombok.*;
 
 @Entity
 @Table(name = "zipcode")
+@NamedQueries({
+        @NamedQuery(name = "ZipCode.getAllZipCodesAndCities", query = "SELECT new org.HobbyHub.dto.ZipCityDTO(z.zip, z.cityName) FROM ZipCode z"),
+})
 public class ZipCode {
 
     @Id
