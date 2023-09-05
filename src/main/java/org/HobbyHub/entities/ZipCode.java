@@ -1,4 +1,4 @@
-package entities;
+package org.HobbyHub.entities;
 import jakarta.persistence.*;
 
 @Entity

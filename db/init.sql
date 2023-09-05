@@ -6,30 +6,34 @@
 
 
 
+-- DATABASE NEEDS TO BE CREATED MANUALLY BEFORE RUNNING THIS SCRIPT!!!!!
+
+
+-- COPY PASTE THIS INTO A QUERY CONSOLE TO CREATE THE DATABASE AND TABLES
 
 
  DO $$
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'HubbyHub') THEN
-        CREATE DATABASE "HubbyHub";
-        RAISE NOTICE 'Database HubbyHub created.';
+    IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'HobbyHub') THEN
+        CREATE DATABASE "HobbyHub";
+        RAISE NOTICE 'Database HobbyHub created.';
     ELSE
-        RAISE NOTICE 'Database HubbyHub already exists.';
+        RAISE NOTICE 'Database HobbyHub already exists.';
     END IF;
 
     -- Drop tables if the database already exists
-    IF EXISTS (SELECT 1 FROM pg_database WHERE datname = 'HubbyHub') THEN
+    IF EXISTS (SELECT 1 FROM pg_database WHERE datname = 'HobbyHub') THEN
         DROP TABLE IF EXISTS public.zipcode, public.address, public.users, public.phone, public.hobby_user, public.hobby;
     END IF;
 END $$;
 
 
 
-\c HubbyHub
+\c HobbyHub
 
 -- create tables
 
-CREATE TABLE public.zipcode
+CREATE TABLE zipcode
 (
     zip bigint PRIMARY KEY NOT NULL,
     city_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
@@ -37,7 +41,7 @@ CREATE TABLE public.zipcode
     municipality_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL
 );
 
-CREATE TABLE public.address
+CREATE TABLE address
 (
     id bigint PRIMARY KEY NOT NULL,
     street_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
@@ -45,7 +49,7 @@ CREATE TABLE public.address
     zip bigint CONSTRAINT KEY REFERENCES zipcode(zip)
 );
 
-   CREATE TABLE public.users
+   CREATE TABLE users
 (
     id bigint PRIMARY KEY NOT NULL,
     first_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
@@ -61,14 +65,14 @@ CREATE TABLE public.address
 
 
 
-    CREATE TABLE public.phone
+    CREATE TABLE phone
     (
         id bigint PRIMARY KEY NOT NULL,
         number character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
         user_id bigint CONSTRAINT KEY REFERENCES users(id)
     );
 
-    CREATE TABLE public.hobby_user
+    CREATE TABLE hobby_user
     (
         hobby_id character varying(255) COLLATE pg_catalog."default" NOT NULL,
         user_id bigint CONSTRAINT KEY REFERENCES users(id),
@@ -76,7 +80,7 @@ CREATE TABLE public.address
     );
 
 
-    CREATE TABLE public.hobby
+    CREATE TABLE hobby
     (
         id character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
         name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
