@@ -60,13 +60,15 @@ public class User {
         this.address = address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-        if (address != null) {
-            address.addUser(this);
-        }
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDate.now();
+        updatedAt = LocalDate.now();
+    }
 
-
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDate.now();
     }
 
 }
