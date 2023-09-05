@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 
-@Table(name = "user")
+@Table(name = "'user'")
 @Entity
 public class User {
 
@@ -42,14 +42,18 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @ManyToMany
+    @JoinTable(
+            name = "user_hobby",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "hobby_id")
+    )
     private List<Hobby> hobbies;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne
-    @Column(name = "address", nullable = false)
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
@@ -57,6 +61,10 @@ public class User {
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
+        this.address = address;
+    }
+
+    public void setAddress(Address address) {
         this.address = address;
     }
 

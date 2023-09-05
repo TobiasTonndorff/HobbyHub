@@ -6,8 +6,8 @@
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="9a040c9b-aa14-4df9-a4df-93978abfc07b">
-      <console name="db" type="STANDARD" schema="HobbyHub" session="Main" />
+    <connection id="fbade7c1-ca2b-4565-8a90-c58642eb9760">
+      <console name="HubbyHub" type="STANDARD" schema="HubbyHub" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -17,23 +17,13 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="9a040c9b-aa14-4df9-a4df-93978abfc07b">
-      <session name="Session 1" id="73f6b9c1-f140-4d99-b1f5-40509cc38c32" />
-    </connection>
+    <connection id="fbade7c1-ca2b-4565-8a90-c58642eb9760" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/db/init.sql" connection-id="fbade7c1-ca2b-4565-8a90-c58642eb9760" session-id="MAIN" current-schema="public" />
-  </component>
-  <component name="DBNavigator.Project.MethodExecutionManager">
-    <method-browser />
-    <execution-history>
-      <group-entries value="true" />
-      <execution-inputs />
-    </execution-history>
-    <argument-values-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -46,9 +36,9 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="9a040c9b-aa14-4df9-a4df-93978abfc07b" active="true" signed="true">
+      <connection id="fbade7c1-ca2b-4565-8a90-c58642eb9760" active="true" signed="true">
         <database>
-          <name value="db" />
+          <name value="HubbyHub" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -59,7 +49,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="5432" />
-          <database value="HobbyHub" />
+          <database value="HubbyHub" />
           <tns-folder value="" />
           <tns-profile value="" />
           <type value="USER_PASSWORD" />

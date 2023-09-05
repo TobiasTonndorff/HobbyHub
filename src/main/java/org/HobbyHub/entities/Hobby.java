@@ -21,7 +21,7 @@ public class Hobby {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "wikilink")
+    @Column(name = "wiki_link")
     private String wikiLink;
 
     @Enumerated(EnumType.STRING)
@@ -32,7 +32,7 @@ public class Hobby {
     @Column(name = "type")
     private HobbyType type;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "hobbies")
     private Set<User> users = new HashSet<>();
 
     public Hobby(String name, String wikiLink, Category category, HobbyType type) {
@@ -47,17 +47,14 @@ public class Hobby {
     }
 
 
-
-
-
-
     public enum HobbyType {
-        INDENDØRS("Indendørs"),
-        KONKURRENCE("Konkurrence"),
-        KOMBI("Indendørs/Udendørs"),
+        INDOOR("Indendørs"),
+        CONCERT("Konkurrence"),
+        COMBO("Indendørs/Udendørs"),
         OBSERVATION("Observation"),
-        SAMLER("Samler hobbyer"),
-        UDENDØRS("Udendørs"),
+        COLLECTING("Samler hobbyer"),
+        EDUCATIONAL("Educational hobbies"),
+        OUTDOOR("Udendørs"),
         NA("---");
 
         private final String typeString;
@@ -68,10 +65,10 @@ public class Hobby {
     }
 
     public enum Category {
-        GERNEREL("Generel"),
+        GENERAL("Generel"),
         EDUCATIONAL("Educational hobbies"),
-        SAMLINGER("Samler hobbyer"),
-        KONKURRENCE("Konkurrence"),
+        COLLECTING("Samler hobbyer"),
+        CONCERT("Konkurrence"),
         OBSERVATION("Observation");
 
         private final String categoryString;

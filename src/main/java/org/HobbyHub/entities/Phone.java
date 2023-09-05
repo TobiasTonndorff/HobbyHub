@@ -19,11 +19,19 @@ public class Phone {
     @Column(name = "number", nullable = false)
     private String number;
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Phone(String number) {
         this.number = number;
     }
-    
-    @ManyToOne
-    private User user;
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
 }

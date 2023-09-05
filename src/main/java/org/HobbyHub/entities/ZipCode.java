@@ -1,5 +1,7 @@
 package org.HobbyHub.entities;
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Set;
 import lombok.*;
@@ -11,6 +13,9 @@ import lombok.*;
 
 @Entity
 @Table(name = "zipcode")
+@NamedQueries({
+        @NamedQuery(name = "ZipCode.getAllZipCodesAndCities", query = "SELECT new org.HobbyHub.dto.ZipCityDTO(z.zip, z.cityName) FROM ZipCode z"),
+})
 public class ZipCode {
 
     @Id
