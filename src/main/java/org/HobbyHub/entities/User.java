@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 
-@Table(name = "users")
+@Table(name = "user")
 @Entity
 public class User {
 
@@ -42,7 +42,7 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "user")
     private List<Hobby> hobbies;
 
     @OneToMany(mappedBy = "user")
@@ -60,13 +60,15 @@ public class User {
         this.address = address;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-        if (address != null) {
-            address.addUser(this);
-        }
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDate.now();
+        updatedAt = LocalDate.now();
+    }
 
-
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDate.now();
     }
 
 }
