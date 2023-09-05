@@ -2,7 +2,12 @@ package org.HobbyHub.entities;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.*;
 
+@NoArgsConstructor
+@Getter
+@ToString
+@EqualsAndHashCode
 
 @Entity
 @Table(name = "zipcode")
@@ -23,7 +28,6 @@ public class ZipCode {
     @OneToMany(mappedBy = "zipCode")
     private Set<Address> adresses = new HashSet<>();
 
-    public ZipCode() {}
 
     public ZipCode(String cityName, String regionName, String municipalityName, Set<Address> adresses) {
         this.cityName = cityName;
