@@ -2,7 +2,7 @@ package config;
 
 import entities.Address;
 import entities.Hobby;
-import entities.PhoneNumber;
+import entities.Phone;
 import entities.User;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -63,7 +63,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Hobby.class);
         configuration.addAnnotatedClass(Address.class);
-        configuration.addAnnotatedClass(PhoneNumber.class);
+        configuration.addAnnotatedClass(Phone.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {
