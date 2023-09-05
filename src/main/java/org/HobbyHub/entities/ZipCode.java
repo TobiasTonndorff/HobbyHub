@@ -1,5 +1,7 @@
 package org.HobbyHub.entities;
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.util.HashSet;
 import java.util.Set;
 import lombok.*;
