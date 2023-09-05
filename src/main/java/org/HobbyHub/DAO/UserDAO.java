@@ -37,7 +37,7 @@ public class UserDAO {
         }
     }
 
-    public User getUser(int id){
+    public User getUserById(int id){
         try(var em = emf.createEntityManager()){
             return em.find(User.class, id);
         }
@@ -65,6 +65,22 @@ public class UserDAO {
             em.persist(user);
             em.getTransaction().commit();
             return user;
+        }
+    }
+
+    public User getUserByEmail(String email){
+        try(var em = emf.createEntityManager()){
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        }
+    }
+
+    public User getUserByAddressStreetName(String streetName){
+        try(var em = emf.createEntityManager()){
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.streetName = :streetName", User.class);
+            query.setParameter("streetName", streetName);
+            return query.getSingleResult();
         }
     }
 
