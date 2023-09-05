@@ -32,7 +32,6 @@ public class Address {
 
 
     @ManyToOne
-    @JoinColumn(name = "zip")
     private ZipCode zipCode;
 
     // bi-directional update
