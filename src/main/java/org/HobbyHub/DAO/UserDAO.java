@@ -28,7 +28,34 @@ public class UserDAO {
 
     public void updateUser(User user){
         try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+        } catch (Exception e){
+            e.printStackTrace();
 
+        }
+    }
+
+    public User getUser(int id){
+        try(var em = emf.createEntityManager()){
+            return em.find(User.class, id);
+        }
+    }
+
+    public void deleteUser(int id){
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.remove(em.find(User.class, id));
+            em.getTransaction().commit();
+        }
+    }
+
+    public void deleteUser(User user){
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.remove(user);
+            em.getTransaction().commit();
         }
     }
 

@@ -42,7 +42,7 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Hobby> hobbies;
 
     @OneToMany(mappedBy = "user")

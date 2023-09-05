@@ -49,7 +49,7 @@ CREATE TABLE address
     zip bigint CONSTRAINT KEY REFERENCES zipcode(zip)
 );
 
-   CREATE TABLE user
+   CREATE TABLE users
 (
     id bigint PRIMARY KEY NOT NULL,
     first_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
