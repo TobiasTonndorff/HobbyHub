@@ -1,4 +1,4 @@
-package org.HubbyHub.entities;
+package org.HobbyHub.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
