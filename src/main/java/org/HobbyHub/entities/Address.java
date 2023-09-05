@@ -14,7 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode
 
 
-@Entity
+@Entity''
 @Table(name = "address")
 
 public class Address {
