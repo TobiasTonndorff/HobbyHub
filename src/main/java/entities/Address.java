@@ -30,6 +30,11 @@ public class Address {
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
 
+
+    @ManyToOne
+    @JoinColumn(name = "zip")
+    private ZipCode zipCode;
+
     // bi-directional update
     public void addUser(User user){
         this.users.add(user);
