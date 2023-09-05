@@ -38,5 +38,15 @@ private static AddressDAO instance;
                 e.printStackTrace();
             }
         }
-        
+        public void deleteAddress(AddressDAO addressDAO){
+            try (var em = emf.createEntityManager()){
+                em.getTransaction().begin();
+                em.remove(addressDAO);
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
 }
