@@ -9,8 +9,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "phone_number")
-public class PhoneNumber {
+@Table(name = "phone")
+public class Phone {
     @Id
     @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class PhoneNumber {
     @Column(name = "number", nullable = false)
     private String number;
 
-    public PhoneNumber(String number) {
+    public Phone(String number) {
         this.number = number;
     }
     
