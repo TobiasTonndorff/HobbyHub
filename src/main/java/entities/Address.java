@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 
@@ -27,9 +26,8 @@ public class Address {
 
     //En til mange relation med User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
-
 
     @ManyToOne
     private ZipCode zipCode;

@@ -16,24 +16,30 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="fbade7c1-ca2b-4565-8a90-c58642eb9760" />
+  </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/db/init.sql" connection-id="fbade7c1-ca2b-4565-8a90-c58642eb9760" session-id="MAIN" current-schema="public" />
+    <mapping file-url="file://$PROJECT_DIR$/db/datafiller.sql" connection-id="fbade7c1-ca2b-4565-8a90-c58642eb9760" session-id="MAIN" current-schema="public" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
+    <recently-used-interfaces>
+      <mapping database-type="POSTGRES" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
       <connection id="fbade7c1-ca2b-4565-8a90-c58642eb9760" active="true" signed="true">
         <database>
-          <name value="Connection" />
+          <name value="HubbyHub" />
           <description value="" />
           <database-type value="POSTGRES" />
           <config-type value="BASIC" />
@@ -44,7 +50,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="5432" />
-          <database value="postgres" />
+          <database value="HubbyHub" />
           <tns-folder value="" />
           <tns-profile value="" />
           <type value="USER_PASSWORD" />

@@ -1,4 +1,4 @@
-package entities;
+package org.HobbyHub.entities;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

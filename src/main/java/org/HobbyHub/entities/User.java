@@ -1,11 +1,13 @@
-package entities;
+package org.HobbyHub.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@Setter
+
 @Getter
 @NoArgsConstructor
 @ToString
@@ -18,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
+
     @Column(name = "firstname", nullable = false)
     private String firstname;
 
@@ -43,21 +45,29 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private List<Hobby> hobbies;
 
-    @OneToMany(mappedBy = "phone")
-    private List<Phone> phones;
+    @OneToMany(mappedBy = "user")
+    private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne
     @Column(name = "address", nullable = false)
     @JoinColumn(name = "address")
     private Address address;
 
-    public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, Address address){
+    public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
         this.firstname = firstname;
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.address = address;
     }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        if (address != null) {
+            address.addUser(this);
+        }
+
+
+    }
+
 }
