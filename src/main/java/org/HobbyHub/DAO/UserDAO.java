@@ -59,6 +59,15 @@ public class UserDAO {
         }
     }
 
+    public User createUser(User user){
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+            return user;
+        }
+    }
+
 
 
 }
