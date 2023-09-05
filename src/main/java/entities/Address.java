@@ -19,7 +19,7 @@ import java.util.Set;
 
 public class Address {
 
-    // primary key og generation strategy
+    // primary key and generation strategy
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -34,12 +34,12 @@ public class Address {
 
 
 
-    // mange til en relation med ZipCode
+    // many to one relation with ZipCode
     @ManyToOne
     private ZipCode zipCode;
 
 
-    //En til mange relation med User
+    //one to many relation with User
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private Set<User> users = new HashSet<>();
@@ -55,6 +55,8 @@ public class Address {
         }
     }
 
+
+    // constructor
     public Address(String streetName, String streetNumber) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
