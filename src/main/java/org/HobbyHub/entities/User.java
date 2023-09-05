@@ -13,7 +13,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 
-@Table(name = "users")
+@Table(name = "user")
 @Entity
 public class User {
 
@@ -42,7 +42,7 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "user")
     private List<Hobby> hobbies;
 
     @OneToMany(mappedBy = "user")
