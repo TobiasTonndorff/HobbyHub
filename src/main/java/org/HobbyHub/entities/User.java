@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-    
+
     @Column(name = "firstname", nullable = false)
     private String firstname;
 
@@ -52,13 +52,21 @@ public class User {
     @Column(name = "address", nullable = false)
     private Address address;
 
-    public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, Address address){
+    public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
         this.firstname = firstname;
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.address = address;
     }
+
+    public void setAddress(Address address) {
+        this.address = address;
+        if (address != null) {
+            address.addUser(this);
+        }
+
+
+    }
+
 }
