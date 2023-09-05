@@ -2,10 +2,7 @@ package org.HobbyHub.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
-import org.HobbyHub.entities.Address;
-import org.HobbyHub.entities.Hobby;
-import org.HobbyHub.entities.Phone;
-import org.HobbyHub.entities.User;
+import org.HobbyHub.entities.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -64,6 +61,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Hobby.class);
         configuration.addAnnotatedClass(Address.class);
         configuration.addAnnotatedClass(Phone.class);
+        configuration.addAnnotatedClass(ZipCode.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {
