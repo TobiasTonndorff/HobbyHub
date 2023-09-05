@@ -50,7 +50,6 @@ public class User {
 
     @ManyToOne
     @Column(name = "address", nullable = false)
-    @JoinColumn(name = "address")
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
