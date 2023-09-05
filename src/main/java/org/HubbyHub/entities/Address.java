@@ -41,7 +41,7 @@ public class Address {
 
     //one to many relation with User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     private Set<User> users = new HashSet<>();
 
 
