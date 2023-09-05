@@ -7,7 +7,7 @@ import org.HobbyHub.config.HibernateConfig;
 
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hobbyhub");
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("HobbyHub");
 
 
     }
