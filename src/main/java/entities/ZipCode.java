@@ -23,7 +23,8 @@ public class ZipCode {
     @OneToMany(mappedBy = "zipCode")
     private Set<Address> adresses = new HashSet<>();
 
-
+       public ZipCode() {
+        }
     public ZipCode(String cityName, String regionName, String municipalityName, Set<Address> adresses) {
         this.cityName = cityName;
         this.regionName = regionName;

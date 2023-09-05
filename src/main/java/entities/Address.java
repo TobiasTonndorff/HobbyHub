@@ -27,7 +27,7 @@ public class Address {
 
     //En til mange relation med User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     private Set<User> users = new HashSet<>();
 
 
