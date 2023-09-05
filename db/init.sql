@@ -44,7 +44,7 @@ CREATE TABLE zipcode
 CREATE TABLE address
 (
     id bigint PRIMARY KEY NOT NULL,
-    street_name character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
+    street_name character varying(255) ΩCOLLATE pg_catalog."default" DEFAULT NULL,
     street_number character varying(255) COLLATE pg_catalog."default" DEFAULT NULL,
     zip bigint CONSTRAINT KEY REFERENCES zipcode(zip)
 );

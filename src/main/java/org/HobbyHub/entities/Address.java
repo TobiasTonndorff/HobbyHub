@@ -8,13 +8,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Entity
 
-
-@Entity''
 @Table(name = "address")
 
 public class Address {
@@ -41,7 +39,7 @@ public class Address {
 
     //one to many relation with User
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.PERSIST)
     private Set<User> users = new HashSet<>();
 
 
