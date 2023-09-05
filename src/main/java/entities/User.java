@@ -40,25 +40,23 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @Column(name = "zip", nullable = false)
-    private String zip;
-
     @ManyToMany(mappedBy = "users")
     private List<Hobby> hobbies;
 
     @OneToMany(mappedBy = "phone")
-    private List<PhoneNumber> phones;
+    private List<Phone> phones;
 
     @ManyToOne
+    @Column(name = "address", nullable = false)
     private Address address;
 
-    public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, String zip) {
+    public User(String firstname, String surname, LocalDate birthdate, String email, LocalDate createdAt, LocalDate updatedAt, Address address){
         this.firstname = firstname;
         this.surname = surname;
         this.birthdate = birthdate;
         this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.zip = zip;
+        this.address = address;
     }
 }
