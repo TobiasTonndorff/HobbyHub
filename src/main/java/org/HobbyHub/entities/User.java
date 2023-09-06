@@ -12,12 +12,13 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 
 @Table(name = "'user'")
 @Entity
 @NamedQueries({
         @NamedQuery(name = "user.GetAllUserData", query = "SELECT new org.HobbyHub.dto.UserDataDTO(u.firstname, u.surname, u.birthdate, u.email, u.address) FROM User u WHERE u.id = :id"),
+
+        @NamedQuery(name = "User.getAllUsersByHobbyDTO", query = "SELECT new org.HobbyHub.dto.UserByHobbyDTO(h.name, u.firstname, u.surname, u.email) FROM User u JOIN u.hobbies h where h.id = :id"),
 })
 public class User {
 
@@ -52,12 +53,15 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
+    @ToString.Exclude
     private Set<Hobby> hobbies = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
@@ -76,6 +80,29 @@ public class User {
         hobbies.add(hobby);
     }
 
+    public void setHobbies(List<Hobby> hobbies)  {
+        if (this.hobbies == null) {
+            this.hobbies = new HashSet<>(hobbies);
+            for (Hobby hobby : hobbies) {
+                hobby.addUser(this);
+            }
+        }
+    }
+
+    public void addPhone(Phone phone) {
+        phones.add(phone);
+        phone.setUser(this);
+    }
+
+    public void setPhones(List<Phone> phones) {
+        if (this.phones == null) {
+            this.phones = new HashSet<>(phones);
+            for (Phone phone : phones) {
+                phone.setUser(this);
+            }
+        }
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDate.now();
@@ -85,6 +112,13 @@ public class User {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDate.now();
+    }
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
 }

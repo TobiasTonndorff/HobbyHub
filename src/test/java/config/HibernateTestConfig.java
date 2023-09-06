@@ -1,4 +1,4 @@
-package org.HobbyHub.config;
+package config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Properties;
 
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class HibernateConfig {
+public class HibernateTestConfig {
 
     private static EntityManagerFactory entityManagerFactory;
     private static String dbName;

@@ -39,7 +39,7 @@ public class ZipDAO {
         }
     }
 
-    public ZipCode getZipByCode(String code) {
+    public ZipCode getZipByCode(int code) {
         try(EntityManager em = emf.createEntityManager()) {
             return em.find(ZipCode.class, code);
         }
