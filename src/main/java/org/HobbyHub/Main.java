@@ -35,6 +35,7 @@ public class Main {
         em.close();
 
         UserDataDTO userDTO = userdao.seeUserData(user.getId());
+        System.out.println(userDTO);
 
     }
 
