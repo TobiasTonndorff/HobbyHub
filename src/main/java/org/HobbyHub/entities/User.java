@@ -19,6 +19,8 @@ import java.util.Set;
         @NamedQuery(name = "user.GetAllUserData", query = "SELECT new org.HobbyHub.dto.UserDataDTO(u.firstname, u.surname, u.birthdate, u.email, u.address) FROM User u WHERE u.id = :id"),
 
         @NamedQuery(name = "User.getAllUsersByHobbyDTO", query = "SELECT new org.HobbyHub.dto.UserByHobbyDTO(h.name, u.firstname, u.surname, u.email) FROM User u JOIN u.hobbies h where h.id = :id"),
+
+        @NamedQuery(name = "user.deleteAllUsers", query = "DELETE FROM User u")
 })
 public class User {
 

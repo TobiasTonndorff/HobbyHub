@@ -13,7 +13,8 @@ import java.util.Set;
 @Table(name = "hobby")
 @NamedQueries({
         @NamedQuery(name = "Hobby.HobbiesUserCountDTO", query = "SELECT new org.HobbyHub.dto.HobbyUserCountDTO(h.id, h.name, CAST(COUNT(u) AS int) ) FROM Hobby h JOIN h.users u GROUP BY h.id"),
-        @NamedQuery(name = "Hobby.HobbyUserCountDTO", query = "SELECT new org.HobbyHub.dto.HobbyUserCountDTO(h.id, h.name, CAST(COUNT(u) AS int) ) FROM Hobby h JOIN h.users u WHERE h.id = :id GROUP BY h.id" )
+        @NamedQuery(name = "Hobby.HobbyUserCountDTO", query = "SELECT new org.HobbyHub.dto.HobbyUserCountDTO(h.id, h.name, CAST(COUNT(u) AS int) ) FROM Hobby h JOIN h.users u WHERE h.id = :id GROUP BY h.id" ),
+        @NamedQuery(name = "Hobby.deleteAllHobbies", query = "DELETE FROM Hobby h")
 })
 public class Hobby {
 

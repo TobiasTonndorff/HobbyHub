@@ -7,9 +7,7 @@ import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -26,7 +24,12 @@ class UserTest {
     Set<Hobby> hobbies;
     Set<Phone> phones;
 
-
+    @BeforeAll
+    static void setUpAll() {
+        emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
+        em = emf.createEntityManager();
+        deleteDB();
+    }
 
     @BeforeEach
     void setUp() {
@@ -38,6 +41,18 @@ class UserTest {
     @AfterEach
     void tearDown() {
         em.close();
+    }
+
+
+  private static void deleteDB() {
+        em.getTransaction().begin();
+        em.createNamedQuery("user.deleteAllUsers").executeUpdate();
+        em.createNamedQuery("Hobby.deleteAllHobbies").executeUpdate();
+        em.createNamedQuery("Address.deleteAllAddresses").executeUpdate();
+        em.createNamedQuery("phone.deleteAllPhones").executeUpdate();
+        em.createNamedQuery("ZipCode.deleteAllZipCodes").executeUpdate();
+        em.getTransaction().commit();
+
 
 
 

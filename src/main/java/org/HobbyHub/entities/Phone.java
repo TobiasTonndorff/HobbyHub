@@ -10,6 +10,9 @@ import lombok.ToString;
 @Getter
 @ToString
 @Table(name = "phone")
+@NamedQueries({
+        @NamedQuery(name = "phone.deleteAllPhones", query = "DELETE FROM Phone p")
+})
 public class Phone {
     @Id
     @Column(name = "id", unique = true, nullable = false)

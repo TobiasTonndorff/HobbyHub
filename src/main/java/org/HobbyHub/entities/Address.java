@@ -15,7 +15,10 @@ import java.util.Set;
 
 
 @Table(name = "address")
-
+@NamedQueries({
+        @NamedQuery(name = "Address.getAllAddresses", query = "SELECT a FROM Address a"),
+        @NamedQuery(name = "Address.deleteAllAddresses", query = "DELETE FROM Address a")
+})
 public class Address {
 
     // primary key and generation strategy
