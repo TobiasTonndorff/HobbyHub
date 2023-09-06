@@ -8,6 +8,7 @@ import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.config.HibernateConfig;
 import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
+import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
 
 import java.time.LocalDate;
@@ -22,11 +23,20 @@ public class Main {
 
 //        countAllUsersInAllHobby(emf);
 
-        getAllUsersByHobbyId(emf);
+        //getAllUsersByHobbyId(emf);
 
         getPhonesByUserId(emf);
 
+        addPhoneToUser(emf);
 
+    }
+
+    private static void addPhoneToUser(EntityManagerFactory emf) {
+        PhoneDAO phoneDAO = PhoneDAO.getInstance(emf);
+        User user = UserDAO.getInstance(emf).getUserById(1);
+        Phone phone = new Phone("+45 12345678");
+        phone.setUser(user);
+        phoneDAO.createPhone(phone);
     }
 
     private static void getPhonesByUserId(EntityManagerFactory emf) {
