@@ -37,6 +37,7 @@ public class Main {
         Phone phone = new Phone("+45 12345678");
         phone.setUser(user);
         phoneDAO.createPhone(phone);
+        System.out.println(phone);
     }
 
     private static void getPhonesByUserId(EntityManagerFactory emf) {

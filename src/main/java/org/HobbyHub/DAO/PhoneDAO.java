@@ -20,13 +20,12 @@ public class PhoneDAO {
         return instance;
     }
 
-    public Phone createPhone(Phone phone) {
+    public void createPhone(Phone phone) {
         try(var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(phone);
             em.getTransaction().commit();
             em.close();
-            return phone;
         }
     }
 
