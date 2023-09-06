@@ -26,9 +26,7 @@ public class Main {
 //        countAllUsersInAllHobby(emf);
 
         //getAllUsersByHobbyId(emf);
-
-
-
+        
         //addPhoneToUser(emf);
 
         //getPhonesByUserId(emf);
