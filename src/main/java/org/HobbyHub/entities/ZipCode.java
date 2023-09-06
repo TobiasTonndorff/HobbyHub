@@ -47,5 +47,16 @@ public class ZipCode {
         this.municipalityName = municipalityName;
     }
 
+    public ZipCode(int zip, String cityName, String regionName, String municipalityName) {
+        this.zip = zip;
+        this.cityName = cityName;
+        this.regionName = regionName;
+        this.municipalityName = municipalityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
 
 }
