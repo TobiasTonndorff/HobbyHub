@@ -51,12 +51,15 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
+    @ToString.Exclude
     private Set<Hobby> hobbies = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {
@@ -75,7 +78,28 @@ public class User {
         hobbies.add(hobby);
     }
 
+    public void setHobbies(List<Hobby> hobbies)  {
+        if (this.hobbies == null) {
+            this.hobbies = new HashSet<>(hobbies);
+            for (Hobby hobby : hobbies) {
+                hobby.addUser(this);
+            }
+        }
+    }
 
+    public void addPhone(Phone phone) {
+        phones.add(phone);
+        phone.setUser(this);
+    }
+
+    public void setPhones(List<Phone> phones) {
+        if (this.phones == null) {
+            this.phones = new HashSet<>(phones);
+            for (Phone phone : phones) {
+                phone.setUser(this);
+            }
+        }
+    }
 
     @PrePersist
     protected void onCreate() {

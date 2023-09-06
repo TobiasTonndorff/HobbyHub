@@ -3,10 +3,12 @@ package org.HobbyHub;
 import jakarta.persistence.EntityManagerFactory;
 import org.HobbyHub.DAO.AddressDAO;
 import org.HobbyHub.DAO.HobbyDAO;
+import org.HobbyHub.DAO.PhoneDAO;
 import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.config.HibernateConfig;
 import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
+import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
 
 import java.time.LocalDate;
@@ -21,9 +23,26 @@ public class Main {
 
 //        countAllUsersInAllHobby(emf);
 
-        getAllUsersByHobbyId(emf);
+//        getAllUsersByHobbyId(emf);
+
+        getFullUser(emf);
+
+        getPhonesByUserId(emf);
 
 
+    }
+
+    private static void getPhonesByUserId(EntityManagerFactory emf) {
+        PhoneDAO phoneDAO = PhoneDAO.getInstance(emf);
+
+        phoneDAO.findPhonesByUserId(1).forEach(System.out::println);
+    }
+
+    private static void getFullUser(EntityManagerFactory emf) {
+        UserDAO userDAO = UserDAO.getInstance(emf);
+
+        var res = userDAO.getFullUser("+45 12345678");
+        System.out.println(res);
     }
 
     private static void getAllUsersByHobbyId(EntityManagerFactory emf) {
@@ -55,10 +74,14 @@ public class Main {
         Hobby hobby = hobbyDAO.getHobbyById(1);
         Address address = new Address("Hovedgaden", "1");
 
+
         addressDAO.createAddress(address);
 
-        User steve = new User("Steve", "Jobs", LocalDate.of(1955, 2, 24), "email", address);
+        Phone phone = new Phone("+45 12345678");
 
+
+        User steve = new User("Steve", "Jobs", LocalDate.of(1955, 2, 24), "email", address);
+        steve.addPhone(phone);
 
         hobby.addUser(steve);
         userDAO.saveUser(steve);
