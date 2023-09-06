@@ -3,6 +3,7 @@ package org.HobbyHub;
 import jakarta.persistence.EntityManagerFactory;
 import org.HobbyHub.DAO.AddressDAO;
 import org.HobbyHub.DAO.HobbyDAO;
+import org.HobbyHub.DAO.PhoneDAO;
 import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.config.HibernateConfig;
 import org.HobbyHub.entities.Address;
@@ -23,7 +24,15 @@ public class Main {
 
         getAllUsersByHobbyId(emf);
 
+        getPhonesByUserId(emf);
 
+
+    }
+
+    private static void getPhonesByUserId(EntityManagerFactory emf) {
+        PhoneDAO phoneDAO = PhoneDAO.getInstance(emf);
+
+        phoneDAO.findPhonesByUserId(1).forEach(System.out::println);
     }
 
     private static void getAllUsersByHobbyId(EntityManagerFactory emf) {
