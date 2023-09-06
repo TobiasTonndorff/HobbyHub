@@ -33,4 +33,7 @@ public class Phone {
     }
 
 
+    public void setPhoneNumber(String number) {
+        this.number = number;
+    }
 }
