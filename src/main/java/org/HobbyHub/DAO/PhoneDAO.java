@@ -47,7 +47,6 @@ public class PhoneDAO {
                 em.remove(phone);
             }
             em.getTransaction().commit();
-            em.close();
         }
     }
 

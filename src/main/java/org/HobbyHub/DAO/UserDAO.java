@@ -1,6 +1,12 @@
 package org.HobbyHub.DAO;
 import jakarta.persistence.*;
+import org.HobbyHub.dto.FullUserDTO;
 import org.HobbyHub.dto.UserByHobbyDTO;
+import org.HobbyHub.entities.Address;
+import org.HobbyHub.entities.Hobby;
+import org.HobbyHub.entities.Phone;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.User;
 
 import java.util.List;
@@ -80,13 +86,14 @@ public class UserDAO {
         }
     }
 
-    public User getUserByAddressStreetName(String streetName){
+    public List<User> getUserByAddressStreetName(String streetName){
         try(var em = emf.createEntityManager()){
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.streetName = :streetName", User.class);
             query.setParameter("streetName", streetName);
-            return query.getSingleResult();
+            return query.getResultList();
         }
     }
+
 
     public List<UserByHobbyDTO> getAllUsersByHobbyId(int id){
         try(var em = emf.createEntityManager()){
@@ -96,8 +103,62 @@ public class UserDAO {
         }
     }
 
+    public FullUserDTO getFullUser(String phone) {
+        try (var em = emf.createEntityManager()) {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u JOIN u.phones p WHERE p.number = :phone",
+                    User.class
+            );
+            query.setParameter("phone", phone);
+            User user = query.getSingleResult();
+
+            TypedQuery<Hobby> hobbyQuery = em.createQuery(
+                    "SELECT h FROM Hobby h JOIN h.users u WHERE u.id = :id", Hobby.class
+            );
+            hobbyQuery.setParameter("id", user.getId());
+            List<Hobby> hobbies = hobbyQuery.getResultList();
 
 
+            // get address via user
+            TypedQuery<Address> addressQuery = em.createQuery(
+                    "SELECT a FROM Address a JOIN a.users u WHERE u.id = :id", Address.class
+            );
+            addressQuery.setParameter("id", user.getId());
+            Address address = addressQuery.getSingleResult();
+            // get phones for user
+            TypedQuery<Phone> phoneQuery = em.createQuery(
+                    "select p from Phone p where p.user.id = :id", Phone.class
+            );
+            phoneQuery.setParameter("id", user.getId());
+            List<Phone> phones = phoneQuery.getResultList();
 
+            FullUserDTO fullUserDTO = new FullUserDTO(user, hobbies, phones, address);
+            return fullUserDTO;
 
+        }
+
+    }
+public List<User> getAllUsersInCity(EntityManagerFactory emf, String city){
+        try(var em = emf.createEntityManager()) {
+            Address address = new Address();
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.zipCode.cityName = :city_name", User.class);
+            query.setParameter("city_name", city);
+            return query.getResultList();
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+              }
+         }
+
+    public UserDataDTO seeUserData(int id) {
+        try (var em = emf.createEntityManager()) {
+
+            TypedQuery<UserDataDTO> query = em.createNamedQuery("user.GetAllUserData", UserDataDTO.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+    }
 }
+
+
+

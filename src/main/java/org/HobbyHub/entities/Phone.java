@@ -19,7 +19,6 @@ public class Phone {
     @Column(name = "number", nullable = false)
     private String number;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -37,4 +36,7 @@ public class Phone {
         this.number = number;
     }
 
+    public void setPhoneNumber(String number) {
+        this.number = number;
+    }
 }

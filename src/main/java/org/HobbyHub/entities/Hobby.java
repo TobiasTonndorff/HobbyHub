@@ -9,7 +9,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name = "hobby")
 @NamedQueries({
@@ -52,6 +51,9 @@ public class Hobby {
 
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public enum HobbyType {
         INDOOR("Indendørs"),

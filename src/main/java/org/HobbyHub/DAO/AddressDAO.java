@@ -27,41 +27,34 @@ private static AddressDAO instance;
             e.printStackTrace();
 
             }
-
-
      }
 
-
-
-
-    public AddressDAO getAddressById(int id){
+    public Address getAddressById(int id){
         try (var em = emf.createEntityManager()){
-            return em.find(AddressDAO.class, id);
+            return em.find(Address.class, id);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-
-
-
-    public void updateAddress(AddressDAO addressDAO) {
+    public void updateAddress(Address address) {
             try (var em = emf.createEntityManager()) {
                 em.getTransaction().begin();
-                em.persist(addressDAO);
+                em.persist(address);
                 em.getTransaction().commit();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        public void deleteAddress(AddressDAO addressDAO){
-            try (var em = emf.createEntityManager()){
-                em.getTransaction().begin();
-                em.remove(addressDAO);
-                em.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+    public void deleteAddress(Address address){
+        try (var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            em.remove(address);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 }
