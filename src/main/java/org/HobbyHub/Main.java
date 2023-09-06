@@ -12,6 +12,7 @@ import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,11 +33,14 @@ public class Main {
 
     }
 
+
+
     private static void getPhonesByUserId(EntityManagerFactory emf) {
         PhoneDAO phoneDAO = PhoneDAO.getInstance(emf);
 
         phoneDAO.findPhonesByUserId(1).forEach(System.out::println);
     }
+
 
     private static void getFullUser(EntityManagerFactory emf) {
         UserDAO userDAO = UserDAO.getInstance(emf);
@@ -87,5 +91,19 @@ public class Main {
         userDAO.saveUser(steve);
 
         hobbyDAO.updateHobby(hobby);
+    }
+
+   /* private static void getAllUsersByCity(EntityManagerFactory emf){
+        UserDAO userDAO = UserDAO.getInstance(emf);
+        String targetCity = EntityManagerFactoryConfig.getEntityManagerFactoryConfig("hobbyhub");
+    }*/
+
+
+    public static void getAllUsersByCity(EntityManagerFactory emf){
+        UserDAO userDAO = UserDAO.getInstance(emf);
+        userDAO.getAllUsersInCity(emf, "Aulum").forEach(System.out::println);
+        if(userDAO.getAllUsersInCity(emf, "Aulum").isEmpty()){
+            System.out.println("No users in this city");
+        }
     }
 }
