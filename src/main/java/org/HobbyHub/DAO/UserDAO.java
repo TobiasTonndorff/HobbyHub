@@ -92,7 +92,10 @@ public class UserDAO {
     public UserDataDTO seeUserData(int id) {
         try (var em = emf.createEntityManager()) {
 
-            return (UserDataDTO) em.createNamedQuery("user.GetAllUserData", UserDataDTO.class).setParameter("id", id).getResultList();
+            TypedQuery<UserDataDTO> query = em.createNamedQuery("user.GetAllUserData", UserDataDTO.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+
         }
 
 
