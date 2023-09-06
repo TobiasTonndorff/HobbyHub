@@ -80,11 +80,11 @@ public class UserDAO {
         }
     }
 
-    public User getUserByAddressStreetName(String streetName){
+    public List<User> getUserByAddressStreetName(String streetName){
         try(var em = emf.createEntityManager()){
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.streetName = :streetName", User.class);
             query.setParameter("streetName", streetName);
-            return query.getSingleResult();
+            return query.getResultList();
         }
     }
 
@@ -95,7 +95,6 @@ public class UserDAO {
             return query.getResultList();
         }
     }
-
 
 
 
