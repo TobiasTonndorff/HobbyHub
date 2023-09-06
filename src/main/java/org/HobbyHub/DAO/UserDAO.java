@@ -1,6 +1,10 @@
 package org.HobbyHub.DAO;
 import jakarta.persistence.*;
+import org.HobbyHub.dto.FullUserDTO;
 import org.HobbyHub.dto.UserByHobbyDTO;
+import org.HobbyHub.entities.Address;
+import org.HobbyHub.entities.Hobby;
+import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
 
 import java.util.List;
@@ -94,6 +98,44 @@ public class UserDAO {
             query.setParameter("id", id);
             return query.getResultList();
         }
+    }
+
+    public FullUserDTO getFullUser(String phone) {
+        try (var em = emf.createEntityManager()) {
+            TypedQuery<User> query = em.createQuery(
+                    "SELECT u FROM User u JOIN u.phones p WHERE p.number = :phone",
+                    User.class
+            );
+            query.setParameter("phone", phone);
+            User user = query.getSingleResult();
+
+            TypedQuery<Hobby> hobbyQuery = em.createQuery(
+                    "SELECT h FROM Hobby h JOIN h.users u WHERE u.id = :id", Hobby.class
+            );
+            hobbyQuery.setParameter("id", user.getId());
+            List<Hobby> hobbies = hobbyQuery.getResultList();
+
+
+            // get address via user
+            TypedQuery<Address> addressQuery = em.createQuery(
+                    "SELECT a FROM Address a JOIN a.users u WHERE u.id = :id", Address.class
+            );
+            addressQuery.setParameter("id", user.getId());
+            Address address = addressQuery.getSingleResult();
+
+
+            // get phones for user
+            TypedQuery<Phone> phoneQuery = em.createQuery(
+                    "select p from Phone p where p.user.id = :id", Phone.class
+            );
+            phoneQuery.setParameter("id", user.getId());
+            List<Phone> phones = phoneQuery.getResultList();
+
+            FullUserDTO fullUserDTO = new FullUserDTO(user, hobbies, phones, address);
+            return fullUserDTO;
+
+        }
+
     }
 
 
