@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "phone_number")
+@Table(name = "phone")
 public class Phone {
     @Id
     @Column(name = "id", unique = true, nullable = false)

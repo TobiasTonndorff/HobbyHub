@@ -51,12 +51,15 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
+    @ToString.Exclude
     private Set<Hobby> hobbies = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Set<Phone> phones = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @ToString.Exclude
     private Address address;
 
     public User(String firstname, String surname, LocalDate birthdate, String email, Address address) {

@@ -1,5 +1,6 @@
 package org.HobbyHub;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.HobbyHub.DAO.AddressDAO;
 import org.HobbyHub.DAO.HobbyDAO;
@@ -12,12 +13,13 @@ import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hobbyhub");
 
-//        createUser(emf);
+        //createUser(emf);
 
 //        countAllUsersInAllHobbies(emf);
 
@@ -25,9 +27,11 @@ public class Main {
 
         //getAllUsersByHobbyId(emf);
 
-        getPhonesByUserId(emf);
 
-        addPhoneToUser(emf);
+
+        //addPhoneToUser(emf);
+
+        //getPhonesByUserId(emf);
 
     }
 
@@ -38,6 +42,11 @@ public class Main {
         phone.setUser(user);
         phoneDAO.createPhone(phone);
         System.out.println(phone);
+
+        Phone phone1 = new Phone("+45 43215678");
+        phone1.setUser(user);
+        phoneDAO.createPhone(phone1);
+        System.out.println(phone1);
     }
 
     private static void getPhonesByUserId(EntityManagerFactory emf) {
