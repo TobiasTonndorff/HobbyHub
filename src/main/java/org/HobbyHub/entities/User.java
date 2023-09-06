@@ -11,7 +11,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @ToString
-@EqualsAndHashCode
 
 @Table(name = "'user'")
 @Entity
