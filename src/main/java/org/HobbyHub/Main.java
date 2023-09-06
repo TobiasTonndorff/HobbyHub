@@ -17,25 +17,6 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hobbyhub");
-        UserDAO userdao = UserDAO.getInstance(emf);
-        EntityManager em = emf.createEntityManager();
-
-        Address address = new Address("Hovedgaden", "1");
-
-        em.getTransaction().begin();
-        em.persist(address);
-        em.getTransaction().commit();
-
-        User user = new User("Steve", "Jobs", LocalDate.of(1955, 2, 24), "email", address);
-
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-
-        em.close();
-
-        UserDataDTO userDTO = userdao.seeUserData(user.getId());
-        System.out.println(userDTO);
 
     }
 
