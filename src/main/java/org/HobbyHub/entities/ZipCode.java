@@ -59,6 +59,12 @@ public class ZipCode {
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
+    public void setAddress(Address address){
+        this.adresses.add(address);
+        if(address != null){
+            address.setZipCode(this);
+        }
+    }
 
 
 }

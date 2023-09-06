@@ -140,7 +140,7 @@ public class UserDAO {
         }
 
     }
-public List<User> getAllUsersInCity(EntityManagerFactory emf, String city){
+public List<User> getAllUsersInCity(String city){
         try(var em = emf.createEntityManager()) {
             Address address = new Address();
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.zipCode.cityName = :city_name", User.class);

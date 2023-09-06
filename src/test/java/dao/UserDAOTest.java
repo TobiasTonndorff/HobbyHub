@@ -3,17 +3,18 @@ package dao;
 import config.HibernateTestConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.HobbyHub.DAO.HobbyDAO;
-import org.HobbyHub.DAO.PhoneDAO;
-import org.HobbyHub.DAO.UserDAO;
-import org.HobbyHub.entities.Address;
-import org.HobbyHub.entities.User;
+import jakarta.persistence.Query;
+import org.HobbyHub.DAO.*;
+import org.HobbyHub.dto.FullUserDTO;
+import org.HobbyHub.entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,12 +23,20 @@ class UserDAOTest {
     private static EntityManagerFactory emf;
     private static EntityManager em;
     private static UserDAO userDAO;
+    private static PhoneDAO phoneDAO;
+    private static HobbyDAO hobbyDAO;
+    private static ZipDAO zipDAO;
+    private static AddressDAO addressDAO;
 
     @BeforeAll
     static void setUpAll() {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
         em = emf.createEntityManager();
         userDAO = UserDAO.getInstance(emf);
+        phoneDAO = PhoneDAO.getInstance(emf);
+        hobbyDAO = HobbyDAO.getInstance(emf);
+        zipDAO = ZipDAO.getInstance(emf);
+        addressDAO = AddressDAO.getInstance(emf);
         deleteDB();
 
     }
@@ -50,7 +59,6 @@ class UserDAOTest {
         em.createNamedQuery("Hobby.deleteAllHobbies").executeUpdate();
         em.createNamedQuery("Address.deleteAllAddresses").executeUpdate();
         em.createNamedQuery("phone.deleteAllPhones").executeUpdate();
-        em.createNamedQuery("ZipCode.deleteAllZipCodes").executeUpdate();
         em.getTransaction().commit();
     }
 
@@ -128,4 +136,62 @@ class UserDAOTest {
         userDAO.createUser(user);
         HobbyDAO hobbyDAO = HobbyDAO.getInstance(emf);
     }
+
+    @Test
+    void getFullUser(){
+        User user = new User("john", "doe", LocalDate.of(1990, 1, 1), "john@doe9.com", null);
+        userDAO.createUser(user);
+        Hobby hobby = new Hobby("Fodbold", "https://da.wikipedia.org/wiki/Fodbold", Hobby.Category.GENERAL, Hobby.HobbyType.OUTDOOR);
+        hobbyDAO.createHobby(hobby);
+        Phone phone = new Phone("12345678");
+        phoneDAO.createPhone(phone);
+        Address address = new Address("Hovedgaden", "1");
+        addressDAO.createAddress(address);
+        user.addHobby(hobby);
+        user.addPhone(phone);
+        user.setAddress(address);
+        phone.setUser(user);
+        address.addUser(user);
+        hobby.addUser(user);
+        userDAO.updateUser(user);
+        phoneDAO.updatePhone(phone);
+        addressDAO.updateAddress(address);
+        hobbyDAO.updateHobby(hobby);
+        FullUserDTO fullUserDTO = userDAO.getFullUser("12345678");
+        assertEquals("john", fullUserDTO.getUser().getFirstname());
+        System.out.println(fullUserDTO.toString());
+
+    }
+
+    /*@Test
+    void getAllUsersInCity(){
+        User user = new User("john", "doe", LocalDate.of(1990, 1, 1), "john@doe10.com", null);
+        ZipCode zipCode = new ZipCode(2800, "Kongens Lyngby", "Hovedstaden", "Lyngby-Taarbæk");
+        Address address = new Address("Hovedgaden", "1");
+
+        //instantiating user
+        userDAO.createUser(user);
+        //instantiating zipCode
+        zipDAO.saveZip(zipCode);
+        //instantiating address
+        addressDAO.createAddress(address);
+
+        //adding address to user
+        user.setAddress(address);
+        //adding user to address
+        address.addUser(user);
+        //adding zipCode to address
+        address.setZipCode(zipCode);
+        //adding address to zipCode
+        zipCode.setAddress(address);
+
+        List<User> users = userDAO.getAllUsersInCity("Kongens Lyngby");
+        users.size();
+
+
+
+
+
+
+    }*/
 }

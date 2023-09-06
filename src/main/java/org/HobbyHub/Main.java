@@ -118,11 +118,5 @@ public class Main {
     }*/
 
 
-    public static void getAllUsersByCity(EntityManagerFactory emf){
-        UserDAO userDAO = UserDAO.getInstance(emf);
-        userDAO.getAllUsersInCity(emf, "Aulum").forEach(System.out::println);
-        if(userDAO.getAllUsersInCity(emf, "Aulum").isEmpty()){
-            System.out.println("No users in this city");
-        }
-    }
+
 }
