@@ -19,9 +19,17 @@ public class Main {
 
 //        countAllUsersInAllHobbies(emf);
 
-        countAllUsersInAllHobby(emf);
+//        countAllUsersInAllHobby(emf);
+
+        getAllUsersByHobbyId(emf);
 
 
+    }
+
+    private static void getAllUsersByHobbyId(EntityManagerFactory emf) {
+        UserDAO userDAO = UserDAO.getInstance(emf);
+
+        userDAO.getAllUsersByHobbyId(1).forEach(System.out::println);
     }
 
     private static void countAllUsersInAllHobby(EntityManagerFactory emf) {

@@ -1,6 +1,10 @@
 package org.HobbyHub.DAO;
 import jakarta.persistence.*;
+import org.HobbyHub.dto.UserByHobbyDTO;
 import org.HobbyHub.entities.User;
+
+import java.util.List;
+
 public class UserDAO {
 
     private static EntityManagerFactory emf;
@@ -81,6 +85,14 @@ public class UserDAO {
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.streetName = :streetName", User.class);
             query.setParameter("streetName", streetName);
             return query.getSingleResult();
+        }
+    }
+
+    public List<UserByHobbyDTO> getAllUsersByHobbyId(int id){
+        try(var em = emf.createEntityManager()){
+            TypedQuery<UserByHobbyDTO> query = em.createNamedQuery("User.getAllUsersByHobbyDTO", UserByHobbyDTO.class);
+            query.setParameter("id", id);
+            return query.getResultList();
         }
     }
 

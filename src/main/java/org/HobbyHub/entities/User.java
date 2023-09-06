@@ -15,6 +15,9 @@ import java.util.Set;
 
 @Table(name = "'user'")
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "User.getAllUsersByHobbyDTO", query = "SELECT new org.HobbyHub.dto.UserByHobbyDTO(h.name, u.firstname, u.surname, u.email) FROM User u JOIN u.hobbies h where h.id = :id"),
+})
 public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
