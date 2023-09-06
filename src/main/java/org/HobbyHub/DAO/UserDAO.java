@@ -74,7 +74,9 @@ public class UserDAO {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
+
             return user;
+
         }
     }
 
