@@ -7,8 +7,6 @@ import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,14 +27,16 @@ class UserTest {
     Set<Phone> phones;
 
 
+
     @BeforeEach
     void setUp() {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
         em = emf.createEntityManager();
-        user = new User();
         address = new Address();
         hobbies = new HashSet<>();
         phones = new HashSet<>();
+
+
 
 
 
@@ -45,6 +45,7 @@ class UserTest {
 
     @AfterEach
     void tearDown() {
+
         em.close();
     }
 
@@ -212,13 +213,27 @@ User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
         em.getTransaction().commit();
         em.close();
         phone.setUser(user1);
+        user1.addPhone(phone);
         phone.getUser();
+        user1.getPhones();
         System.out.println("TestUser phones: " + user1.getPhones().toString());
+        assertTrue(user1.getPhones().contains(phone));
 
 
     }
 
     @Test
     void getAddress() {
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        Address address = new Address("ahornvænget", "5");
+        em.getTransaction().begin();
+        em.persist(user1);
+        em.persist(address);
+        em.getTransaction().commit();
+        em.close();
+        user1.setAddress(address);
+        System.out.println("TestUser address: " + user1.getAddress());
+        assertEquals(address, user1.getAddress());
+
     }
 }
