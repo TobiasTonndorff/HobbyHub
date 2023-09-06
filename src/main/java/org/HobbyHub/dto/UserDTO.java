@@ -17,13 +17,13 @@ public class UserDTO {
     private String email;
     private Address address;
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstname();
-        this.surname = user.getSurname();
-        this.birthdate = user.getBirthdate();
-        this.email = user.getEmail();
-        this.address = user.getAddress();
+    public UserDTO(int id, String firstName, String surname, LocalDate birthdate, String email, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.address = address;
     }
 
 
