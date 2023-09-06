@@ -1,5 +1,7 @@
 package org.HobbyHub.DAO;
 import jakarta.persistence.*;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.User;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class UserDAO {
 
     public void saveUser(User user) {
 
-        try(var em = emf.createEntityManager()) {
+        try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
@@ -29,41 +31,41 @@ public class UserDAO {
         }
     }
 
-    public void updateUser(User user){
-        try(var em = emf.createEntityManager()){
+    public void updateUser(User user) {
+        try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.merge(user);
             em.getTransaction().commit();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
     }
 
-    public User getUserById(int id){
-        try(var em = emf.createEntityManager()){
+    public User getUserById(int id) {
+        try (var em = emf.createEntityManager()) {
             return em.find(User.class, id);
         }
     }
 
-    public void deleteUser(int id){
-        try(var em = emf.createEntityManager()){
+    public void deleteUser(int id) {
+        try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.remove(em.find(User.class, id));
             em.getTransaction().commit();
         }
     }
 
-    public void deleteUser(User user){
-        try(var em = emf.createEntityManager()){
+    public void deleteUser(User user) {
+        try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.remove(user);
             em.getTransaction().commit();
         }
     }
 
-    public User createUser(User user){
-        try(var em = emf.createEntityManager()){
+    public User createUser(User user) {
+        try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
@@ -71,23 +73,28 @@ public class UserDAO {
         }
     }
 
-    public User getUserByEmail(String email){
-        try(var em = emf.createEntityManager()){
+    public User getUserByEmail(String email) {
+        try (var em = emf.createEntityManager()) {
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
             query.setParameter("email", email);
             return query.getSingleResult();
         }
     }
 
-    public List<User> getUserByAddressStreetName(String streetName){
-        try(var em = emf.createEntityManager()){
+    public List<User> getUserByAddressStreetName(String streetName) {
+        try (var em = emf.createEntityManager()) {
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.streetName = :streetName", User.class);
             query.setParameter("streetName", streetName);
             return query.getResultList();
         }
     }
 
+    public UserDataDTO seeUserData(int id) {
+        try (var em = emf.createEntityManager()) {
+
+            return (UserDataDTO) em.createNamedQuery("user.GetAllUserData", UserDataDTO.class).setParameter("id", id).getResultList();
+        }
 
 
-
+    }
 }

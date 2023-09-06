@@ -5,6 +5,8 @@ import org.HobbyHub.DAO.AddressDAO;
 import org.HobbyHub.DAO.HobbyDAO;
 import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.config.HibernateConfig;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.User;
@@ -14,12 +16,10 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig("hobbyhub");
+        UserDAO userdao = UserDAO.getInstance(emf);
 
-//        createUser(emf);
-
-//        countAllUsersInAllHobbies(emf);
-
-        countAllUsersInAllHobby(emf);
+        User user = new User("Steve", "Jobs", LocalDate.of(1955, 2, 24), "email", new Address("Hovedgaden", "1"));
+        UserDataDTO userDTO = userdao.seeUserData(user.getId());
 
 
     }
@@ -57,4 +57,6 @@ public class Main {
 
         hobbyDAO.updateHobby(hobby);
     }
+
+
 }
