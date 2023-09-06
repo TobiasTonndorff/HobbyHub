@@ -75,6 +75,8 @@ public class User {
         hobbies.add(hobby);
     }
 
+
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDate.now();
@@ -84,6 +86,13 @@ public class User {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDate.now();
+    }
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
 }
