@@ -40,4 +40,12 @@ public class ZipCode {
         this.municipalityName = municipalityName;
         this.adresses = adresses;
     }
+
+    public ZipCode(String cityName, String regionName, String municipalityName) {
+        this.cityName = cityName;
+        this.regionName = regionName;
+        this.municipalityName = municipalityName;
+    }
+
+
 }

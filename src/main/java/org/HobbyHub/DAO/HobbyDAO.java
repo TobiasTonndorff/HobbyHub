@@ -21,7 +21,7 @@ public class HobbyDAO {
     }
 
 
-    private void createHobby(Hobby hobby){
+    public void createHobby(Hobby hobby){
         try(var em = emf.createEntityManager()){
             em.getTransaction().begin();
             em.persist(hobby);
