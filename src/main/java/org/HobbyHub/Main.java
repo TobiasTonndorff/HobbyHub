@@ -93,10 +93,7 @@ public class Main {
         hobbyDAO.updateHobby(hobby);
     }
 
-   /* private static void getAllUsersByCity(EntityManagerFactory emf){
-        UserDAO userDAO = UserDAO.getInstance(emf);
-        String targetCity = EntityManagerFactoryConfig.getEntityManagerFactoryConfig("hobbyhub");
-    }*/
+
 
 
     public static void getAllUsersByCity(EntityManagerFactory emf){
