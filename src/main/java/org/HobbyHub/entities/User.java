@@ -36,7 +36,7 @@ public class User {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")
-    private LocalDate birthdate;
+        private LocalDate birthdate;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
