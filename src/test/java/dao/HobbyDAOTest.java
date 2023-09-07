@@ -22,12 +22,15 @@ class HobbyDAOTest {
     private static EntityManagerFactory emf;
     private static EntityManager em;
     private static HobbyDAO hobbyDAO;
+    private static UserDAO userDAO;
 
     @BeforeAll
     static void setUpAll() {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
         em = emf.createEntityManager();
         hobbyDAO = HobbyDAO.getInstance(emf);
+        userDAO = UserDAO.getInstance(emf);
+
     }
 
     @AfterEach
@@ -42,12 +45,11 @@ class HobbyDAOTest {
 
         ZipDAO zipDAO = ZipDAO.getInstance(emf);
 
-        ZipCode zipCode = new ZipCode("1234", "test", "test");
+        ZipCode zipCode = new ZipCode(1, "1234", "test", "test");
 
         zipDAO.saveZip(zipCode);
 
 
-        UserDAO userDAO = UserDAO.getInstance(emf);
         AddressDAO addressDAO = AddressDAO.getInstance(emf);
 
         Address address = new Address("Hovedgaden", "1");
@@ -79,18 +81,17 @@ class HobbyDAOTest {
         var hobbyActual = hobbyDAO.getHobbyById(1);
         assertEquals("test2", hobbyActual.getName());
     }
-////////////////////////////
-    //den her driller
     @Test
     void deleteHobby() {
-
-        UserDAO userDAO = UserDAO.getInstance(emf);
-        userDAO.deleteUser(1);
+        var res = hobbyDAO.getHobbyById(1);
+        var user = userDAO.getUserById(1);
+        res.removeUser(user);
+        hobbyDAO.updateHobby(res);
+        userDAO.updateUser(user);
         hobbyDAO.deleteHobby(1);
         var hobby = hobbyDAO.getHobbyById(1);
         assertNull(hobby);
     }
-//////////////////////////////
     @Test
     void getHobbyUserCount() {
         var res = hobbyDAO.getHobbyUserCount(1);

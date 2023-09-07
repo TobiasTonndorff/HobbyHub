@@ -15,7 +15,6 @@ import lombok.*;
 @Table(name = "zipcode")
 @NamedQueries({
         @NamedQuery(name = "ZipCode.getAllZipCodesAndCities", query = "SELECT new org.HobbyHub.dto.ZipCityDTO(z.zip, z.cityName) FROM ZipCode z"),
-
         @NamedQuery(name = "ZipCode.deleteAllZipCodes", query = "DELETE FROM ZipCode z"),
 })
 public class ZipCode {

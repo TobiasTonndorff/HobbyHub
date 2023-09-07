@@ -56,6 +56,11 @@ public class Hobby {
         this.name = name;
     }
 
+    public void removeUser(User user) {
+        users.remove(user);
+        user.removeHobby(this);
+    }
+
     public enum HobbyType {
         INDOOR("Indendørs"),
         CONCERT("Konkurrence"),

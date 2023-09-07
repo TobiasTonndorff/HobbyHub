@@ -8,10 +8,7 @@ import org.HobbyHub.DAO.PhoneDAO;
 import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.DAO.ZipDAO;
 import org.HobbyHub.entities.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 
@@ -28,6 +25,7 @@ class PhoneDAOTest {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
         em = emf.createEntityManager();
         phoneDAO = PhoneDAO.getInstance(emf);
+        deleteDB();
     }
 
     @BeforeEach
@@ -35,7 +33,7 @@ class PhoneDAOTest {
 
         ZipDAO zipDAO = ZipDAO.getInstance(emf);
 
-        ZipCode zipCode = new ZipCode("1234", "test", "test");
+        ZipCode zipCode = new ZipCode(1,"1234", "test", "test");
 
         zipDAO.saveZip(zipCode);
 
@@ -55,16 +53,33 @@ class PhoneDAOTest {
 
     }
 
-    @AfterEach
-    void tearDownAll() {
+    @AfterAll
+    static void tearDownAll() {
         em.close();
     }
+
+    @AfterEach
+    void tearDownEach() {
+        deleteDB();
+    }
+
+    private static void deleteDB() {
+        em.getTransaction().begin();
+        em.createNamedQuery("user.deleteAllUsers").executeUpdate();
+        em.createNamedQuery("Hobby.deleteAllHobbies").executeUpdate();
+        em.createNamedQuery("Address.deleteAllAddresses").executeUpdate();
+        em.createNamedQuery("phone.deleteAllPhones").executeUpdate();
+        em.createNamedQuery("ZipCode.deleteAllZipCodes").executeUpdate();
+        em.getTransaction().commit();
+    }
+
 
     @Test
     void createPhone() {
         Phone phone = new Phone("12345678");
         phoneDAO.createPhone(phone);
-        assertNotNull(phone.getId());
+        var res = phoneDAO.findPhoneById(1);
+        assertNotNull(res);
     }
 
     @Test
@@ -89,7 +104,9 @@ class PhoneDAOTest {
     void findPhoneById() {
         Phone phone = new Phone("12345678");
         phoneDAO.createPhone(phone);
-        assertNotNull(phoneDAO.findPhoneById(1));
+        var res = phoneDAO.findPhoneById(1);
+        System.out.println(res);
+        assertEquals(1, res.getId());
     }
 
     @Test

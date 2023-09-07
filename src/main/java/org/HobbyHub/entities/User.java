@@ -49,7 +49,7 @@ public class User {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_hobby",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -103,6 +103,10 @@ public class User {
                 phone.setUser(this);
             }
         }
+    }
+
+    public void removeHobby(Hobby hobby) {
+        hobbies.remove(hobby);
     }
 
     @PrePersist
