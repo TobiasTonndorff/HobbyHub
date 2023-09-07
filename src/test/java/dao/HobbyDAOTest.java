@@ -79,14 +79,18 @@ class HobbyDAOTest {
         var hobbyActual = hobbyDAO.getHobbyById(1);
         assertEquals("test2", hobbyActual.getName());
     }
-
+////////////////////////////
+    //den her driller
     @Test
     void deleteHobby() {
+
+        UserDAO userDAO = UserDAO.getInstance(emf);
+        userDAO.deleteUser(1);
         hobbyDAO.deleteHobby(1);
         var hobby = hobbyDAO.getHobbyById(1);
         assertNull(hobby);
     }
-
+//////////////////////////////
     @Test
     void getHobbyUserCount() {
         var res = hobbyDAO.getHobbyUserCount(1);
