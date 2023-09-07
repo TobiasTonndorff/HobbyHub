@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import org.HobbyHub.DAO.*;
 import org.HobbyHub.dto.FullUserDTO;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -163,35 +166,15 @@ class UserDAOTest {
 
     }
 
-    /*@Test
-    void getAllUsersInCity(){
-        User user = new User("john", "doe", LocalDate.of(1990, 1, 1), "john@doe10.com", null);
-        ZipCode zipCode = new ZipCode(2800, "Kongens Lyngby", "Hovedstaden", "Lyngby-Taarbæk");
-        Address address = new Address("Hovedgaden", "1");
-
-        //instantiating user
-        userDAO.createUser(user);
-        //instantiating zipCode
-        zipDAO.saveZip(zipCode);
-        //instantiating address
-        addressDAO.createAddress(address);
-
-        //adding address to user
-        user.setAddress(address);
-        //adding user to address
-        address.addUser(user);
-        //adding zipCode to address
-        address.setZipCode(zipCode);
-        //adding address to zipCode
-        zipCode.setAddress(address);
-
-        List<User> users = userDAO.getAllUsersInCity("Kongens Lyngby");
-        users.size();
 
 
 
 
 
 
-    }*/
+
+
+
+
+
 }
