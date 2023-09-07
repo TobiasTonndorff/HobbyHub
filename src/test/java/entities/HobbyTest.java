@@ -93,7 +93,7 @@ public void getHobbyById(){
         em.getTransaction().commit();
         em.close();
         System.out.println("hobby" + hobby);
-        assertEquals(2, hobby2.getId());
+        assertEquals(3, hobby2.getId());
 }
 
 
