@@ -98,4 +98,15 @@ class PhoneDAOTest {
         phoneDAO.createPhone(phone);
         assertNotNull(phoneDAO.findPhonesByUserId(1));
     }
+
+    @Test
+    void addPhoneToUser(){
+        Phone phone = new Phone("12345678");
+        phoneDAO.createPhone(phone);
+        UserDAO userDAO = UserDAO.getInstance(emf);
+        User user = userDAO.getUserById(1);
+        user.addPhone(phone);
+        userDAO.updateUser(user);
+        assertEquals(1, user.getPhones().size());
+    }
 }
