@@ -5,6 +5,8 @@ import org.HobbyHub.dto.UserByHobbyDTO;
 import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.Phone;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.User;
 
 import java.util.List;
@@ -72,7 +74,9 @@ public class UserDAO {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
+
             return user;
+
         }
     }
 
@@ -91,6 +95,7 @@ public class UserDAO {
             return query.getResultList();
         }
     }
+
 
     public List<UserByHobbyDTO> getAllUsersByHobbyId(int id){
         try(var em = emf.createEntityManager()){
@@ -122,8 +127,6 @@ public class UserDAO {
             );
             addressQuery.setParameter("id", user.getId());
             Address address = addressQuery.getSingleResult();
-
-
             // get phones for user
             TypedQuery<Phone> phoneQuery = em.createQuery(
                     "select p from Phone p where p.user.id = :id", Phone.class
@@ -137,8 +140,7 @@ public class UserDAO {
         }
 
     }
-
-public List<User> getAllUsersInCity(EntityManagerFactory emf, String city){
+public List<User> getAllUsersInCity(String city){
         try(var em = emf.createEntityManager()) {
             Address address = new Address();
             TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.address.zipCode.cityName = :city_name", User.class);
@@ -149,8 +151,16 @@ public List<User> getAllUsersInCity(EntityManagerFactory emf, String city){
             return null;
               }
          }
-}
 
+    public UserDataDTO seeUserData(int id) {
+        try (var em = emf.createEntityManager()) {
+
+            TypedQuery<UserDataDTO> query = em.createNamedQuery("user.GetAllUserData", UserDataDTO.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+    }
+}
 
 
 

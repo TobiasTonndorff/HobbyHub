@@ -9,7 +9,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-@Table(name = "phone_number")
+@Table(name = "phone")
+@NamedQueries({
+        @NamedQuery(name = "phone.deleteAllPhones", query = "DELETE FROM Phone p")
+})
 public class Phone {
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -32,5 +35,11 @@ public class Phone {
         this.user = user;
     }
 
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
+    public void setPhoneNumber(String number) {
+        this.number = number;
+    }
 }

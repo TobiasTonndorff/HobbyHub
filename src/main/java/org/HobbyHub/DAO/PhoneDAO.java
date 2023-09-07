@@ -20,13 +20,12 @@ public class PhoneDAO {
         return instance;
     }
 
-    public Phone createPhone(Phone phone) {
+    public void createPhone(Phone phone) {
         try(var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(phone);
             em.getTransaction().commit();
             em.close();
-            return phone;
         }
     }
 
@@ -48,7 +47,6 @@ public class PhoneDAO {
                 em.remove(phone);
             }
             em.getTransaction().commit();
-            em.close();
         }
     }
 
@@ -60,15 +58,19 @@ public class PhoneDAO {
         }
     }
 
-
-    public List<Phone> findPhonesByUserId(int userId) {
-        try (var em = emf.createEntityManager()) {
-            TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p WHERE p.user.id = :userId", Phone.class);
-            query.setParameter("userId", userId);
+    public List<Phone> findPhonesByUserId(int userid) {
+        try(var em = emf.createEntityManager()) {
+            TypedQuery<Phone> query = em.createQuery("SELECT p FROM Phone p WHERE p.user.id = :id", Phone.class);
+            query.setParameter("id", userid);
             List<Phone> phones = query.getResultList();
             em.close();
             return phones;
         }
     }
+
+
+
+
+
     
 }

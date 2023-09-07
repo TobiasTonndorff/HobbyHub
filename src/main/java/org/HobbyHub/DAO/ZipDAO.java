@@ -3,6 +3,7 @@ package org.HobbyHub.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.HobbyHub.dto.ZipCityDTO;
+import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.ZipCode;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class ZipDAO {
         }
     }
 
-    public ZipCode getZipByCode(String code) {
+    public ZipCode getZipByCode(int code) {
         try(EntityManager em = emf.createEntityManager()) {
             return em.find(ZipCode.class, code);
         }
@@ -58,4 +59,6 @@ public class ZipDAO {
             return em.createNamedQuery("ZipCode.getAllZipCodesAndCities", ZipCityDTO.class).getResultList();
         }
     }
+
+
 }

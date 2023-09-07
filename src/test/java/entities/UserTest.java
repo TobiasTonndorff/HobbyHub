@@ -7,9 +7,7 @@ import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.Phone;
 import org.HobbyHub.entities.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -26,27 +24,36 @@ class UserTest {
     Set<Hobby> hobbies;
     Set<Phone> phones;
 
-
+    @BeforeAll
+    static void setUpAll() {
+        emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
+        em = emf.createEntityManager();
+        deleteDB();
+    }
 
     @BeforeEach
     void setUp() {
         emf = HibernateTestConfig.getEntityManagerFactoryConfig("hobbyhub_test");
         em = emf.createEntityManager();
-        address = new Address();
-        hobbies = new HashSet<>();
-        phones = new HashSet<>();
-
-
-
-
-
 
     }
 
     @AfterEach
     void tearDown() {
-
         em.close();
+    }
+
+
+    private static void deleteDB() {
+        em.getTransaction().begin();
+        em.createNamedQuery("user.deleteAllUsers").executeUpdate();
+        em.createNamedQuery("Hobby.deleteAllHobbies").executeUpdate();
+        em.createNamedQuery("Address.deleteAllAddresses").executeUpdate();
+        em.createNamedQuery("phone.deleteAllPhones").executeUpdate();
+        em.createNamedQuery("ZipCode.deleteAllZipCodes").executeUpdate();
+        em.getTransaction().commit();
+
+
     }
 
     @Test
@@ -89,7 +96,7 @@ class UserTest {
     @Test
 
     void onUpdate() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test1", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -113,7 +120,7 @@ class UserTest {
 
     @Test
     void getId() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test2", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -124,7 +131,7 @@ class UserTest {
 
     @Test
     void getFirstname() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test3", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -135,7 +142,7 @@ class UserTest {
 
     @Test
     void getSurname() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test4", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -146,7 +153,7 @@ class UserTest {
 
     @Test
     void getBirthdate() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test5", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -158,18 +165,18 @@ class UserTest {
 
     @Test
     void getEmail() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test6", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
         em.close();
         System.out.println("TestUser email: " + user1.getEmail());
-        assertEquals("test", user1.getEmail());
+        assertEquals("test6", user1.getEmail());
     }
 
     @Test
     void getCreatedAt() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test7", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -180,7 +187,7 @@ class UserTest {
 
     @Test
     void getUpdatedAt() {
-User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test8", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
@@ -191,7 +198,7 @@ User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
 
     @Test
     void getHobbies() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test9", null);
         Hobby hobby = new Hobby("fodbold", "https://en.wikipedia.org/wiki/Soccer", Hobby.Category.GENERAL, Hobby.HobbyType.OUTDOOR );
         em.getTransaction().begin();
         em.persist(user1);
@@ -205,7 +212,7 @@ User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
 
     @Test
     void getPhones() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test10", null);
         Phone phone = new Phone("12345678");
         em.getTransaction().begin();
         em.persist(user1);
@@ -224,7 +231,7 @@ User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
 
     @Test
     void getAddress() {
-        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test11", null);
         Address address = new Address("ahornvænget", "5");
         em.getTransaction().begin();
         em.persist(user1);

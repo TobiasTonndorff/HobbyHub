@@ -1,11 +1,14 @@
 package org.HobbyHub;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.HobbyHub.DAO.AddressDAO;
 import org.HobbyHub.DAO.HobbyDAO;
 import org.HobbyHub.DAO.PhoneDAO;
 import org.HobbyHub.DAO.UserDAO;
 import org.HobbyHub.config.HibernateConfig;
+import org.HobbyHub.dto.UserDTO;
+import org.HobbyHub.dto.UserDataDTO;
 import org.HobbyHub.entities.Address;
 import org.HobbyHub.entities.Hobby;
 import org.HobbyHub.entities.Phone;
@@ -13,6 +16,7 @@ import org.HobbyHub.entities.User;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,9 +32,22 @@ public class Main {
 
         getFullUser(emf);
 
-        getPhonesByUserId(emf);
+        //getPhonesByUserId(emf);
 
+    }
 
+    private static void addPhoneToUser(EntityManagerFactory emf) {
+        PhoneDAO phoneDAO = PhoneDAO.getInstance(emf);
+        User user = UserDAO.getInstance(emf).getUserById(1);
+        Phone phone = new Phone("+45 12345678");
+        phone.setUser(user);
+        phoneDAO.createPhone(phone);
+        System.out.println(phone);
+
+        Phone phone1 = new Phone("+45 43215678");
+        phone1.setUser(user);
+        phoneDAO.createPhone(phone1);
+        System.out.println(phone1);
     }
 
 
@@ -95,12 +112,11 @@ public class Main {
 
 
 
-
-    public static void getAllUsersByCity(EntityManagerFactory emf){
+   /* private static void getAllUsersByCity(EntityManagerFactory emf){
         UserDAO userDAO = UserDAO.getInstance(emf);
-        userDAO.getAllUsersInCity(emf, "Aulum").forEach(System.out::println);
-        if(userDAO.getAllUsersInCity(emf, "Aulum").isEmpty()){
-            System.out.println("No users in this city");
-        }
-    }
+        String targetCity = EntityManagerFactoryConfig.getEntityManagerFactoryConfig("hobbyhub");
+    }*/
+
+
+
 }

@@ -15,6 +15,8 @@ import lombok.*;
 @Table(name = "zipcode")
 @NamedQueries({
         @NamedQuery(name = "ZipCode.getAllZipCodesAndCities", query = "SELECT new org.HobbyHub.dto.ZipCityDTO(z.zip, z.cityName) FROM ZipCode z"),
+
+        @NamedQuery(name = "ZipCode.deleteAllZipCodes", query = "DELETE FROM ZipCode z"),
 })
 public class ZipCode {
 
@@ -45,6 +47,23 @@ public class ZipCode {
         this.cityName = cityName;
         this.regionName = regionName;
         this.municipalityName = municipalityName;
+    }
+
+    public ZipCode(int zip, String cityName, String regionName, String municipalityName) {
+        this.zip = zip;
+        this.cityName = cityName;
+        this.regionName = regionName;
+        this.municipalityName = municipalityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+    public void setAddress(Address address){
+        this.adresses.add(address);
+        if(address != null){
+            address.setZipCode(this);
+        }
     }
 
 
