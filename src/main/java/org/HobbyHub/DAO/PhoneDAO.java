@@ -3,6 +3,7 @@ package org.HobbyHub.DAO;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
 import org.HobbyHub.entities.Phone;
+import org.HobbyHub.entities.User;
 
 import java.util.List;
 
@@ -69,8 +70,18 @@ public class PhoneDAO {
     }
 
 
+    private static void addPhoneToUser(Phone phone, User user) {
+        try(var em = emf.createEntityManager()){
+            em.getTransaction().begin();
+            user.addPhone(phone);
+            em.merge(user);
+            em.getTransaction().commit();
+            em.close();
+        }
+    }
 
 
 
-    
+
+
 }
