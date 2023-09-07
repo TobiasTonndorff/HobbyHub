@@ -1,7 +1,8 @@
-package config;
+package org.HobbyHub.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
+import org.HobbyHub.entities.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -33,7 +34,7 @@ public class HibernateConfig {
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
-            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on entities
+            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on org.HobbyHub.entities
 
 
             return getEntityManagerFactory(configuration, props);
@@ -56,8 +57,11 @@ public class HibernateConfig {
     }
 
     private static void getAnnotationConfiguration(Configuration configuration) {
-        // add annotated classes
-
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Hobby.class);
+        configuration.addAnnotatedClass(Address.class);
+        configuration.addAnnotatedClass(Phone.class);
+        configuration.addAnnotatedClass(ZipCode.class);
     }
 
     public static EntityManagerFactory getEntityManagerFactoryConfig(String name) {
