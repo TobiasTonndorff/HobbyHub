@@ -44,7 +44,7 @@ class UserTest {
     }
 
 
-  private static void deleteDB() {
+    private static void deleteDB() {
         em.getTransaction().begin();
         em.createNamedQuery("user.deleteAllUsers").executeUpdate();
         em.createNamedQuery("Hobby.deleteAllHobbies").executeUpdate();
@@ -52,8 +52,6 @@ class UserTest {
         em.createNamedQuery("phone.deleteAllPhones").executeUpdate();
         em.createNamedQuery("ZipCode.deleteAllZipCodes").executeUpdate();
         em.getTransaction().commit();
-
-
 
 
     }
@@ -189,7 +187,7 @@ class UserTest {
 
     @Test
     void getUpdatedAt() {
-User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test8", null);
+        User user1 = new User("test", "test", LocalDate.of(1999, 11,3), "test8", null);
         em.getTransaction().begin();
         em.persist(user1);
         em.getTransaction().commit();
