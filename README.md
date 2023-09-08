@@ -10,11 +10,14 @@ Join HobbyHub and start exploring the world of hobbies with a community that und
 
 ## Domain Model
 <p align="center">
-  <img align="middle" width="304" height="521" src="https://github.com/TobiasTonndorff/HobbyHub/assets/26737628/52a6c6bf-4ea6-4d1f-9360-e2d91d8d5e30">
+  <img align="middle" width="304" height="521" src="https://github.com/TobiasTonndorff/HobbyHub/assets/26737628/fd4d0a70-5504-43c1-a62f-3f9d75a55bc4">
 </p>
 
+
+
 ## EER-diagram
-![image](https://github.com/TobiasTonndorff/HobbyHub/assets/26737628/f3941d2e-e52b-43fb-95a2-387943af62d5)
+![image](https://github.com/TobiasTonndorff/HobbyHub/assets/26737628/c701c328-f95c-4045-aaae-a14877e92d01)
+
 
 
 ## Project Collaboration
